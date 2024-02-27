@@ -23,6 +23,7 @@ int getpid(void);
 char* sbrk(int);
 int sleep(int);
 int uptime(void);
+int trace(int); // 添加trace函数声明
 
 // ulib.c
 int stat(const char*, struct stat*);

@@ -36,3 +36,10 @@ entry("getpid");
 entry("sbrk");
 entry("sleep");
 entry("uptime");
+entry("trace");
+# 自动生成用户态系统调用汇编函数，吧syscall.h #define SYS_trace  22的值放入a7,然后ecall，进入内核态，下一步是syscall.c
+# .global trace
+# trace:
+#  li a7, SYS_trace
+#  ecall
+#  ret

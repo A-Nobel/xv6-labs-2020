@@ -1,0 +1,12 @@
+{
+    "files.associations": {
+        "*.json": "jsonc",
+        "*.toml": "toml",
+        "syscall.h": "c",
+        "user.h": "c",
+        "cstdlib": "c",
+        "stat.h": "c",
+        "types.h": "c",
+        "param.h": "c"
+    }
+}

@@ -126,6 +126,7 @@ found:
   memset(&p->context, 0, sizeof(p->context));
   p->context.ra = (uint64)forkret;
   p->context.sp = p->kstack + PGSIZE;
+  p->trace_mask = 0;
 
   return p;
 }
@@ -141,6 +142,7 @@ freeproc(struct proc *p)
   p->trapframe = 0;
   if(p->pagetable)
     proc_freepagetable(p->pagetable, p->sz);
+  p->trace_mask = 0;
   p->pagetable = 0;
   p->sz = 0;
   p->pid = 0;
@@ -292,6 +294,8 @@ fork(void)
   safestrcpy(np->name, p->name, sizeof(p->name));
 
   pid = np->pid;
+
+  np->trace_mask = p->trace_mask;
 
   np->state = RUNNABLE;
 
@@ -692,4 +696,10 @@ procdump(void)
     printf("%d %s %s", p->pid, state, p->name);
     printf("\n");
   }
+}
+
+int trace(int mask){
+  struct proc *p = myproc();
+  p->trace_mask = mask;
+  return 0;
 }
